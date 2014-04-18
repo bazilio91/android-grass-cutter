@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <io.vov.vitamio.widget.VideoView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/videoView" android:layout_weight="1"/>
+
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Settings"
+            android:id="@+id/button"
+            android:layout_gravity="right"
+            android:layout_alignParentEnd="false"
+            android:layout_alignTop="@+id/videoView"
+            android:layout_toRightOf="@+id/toggleButton"/>
+
+    <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/toggleButton"
+            android:checked="true"
+            android:onClick="toggleVideo"
+            android:layout_gravity="center_vertical"/>
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_alignParentEnd="false"
+            android:layout_alignBottom="@+id/videoView"
+            android:id="@+id/linearLayout">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Buff. size"
+                android:id="@+id/textView"
+                android:layout_gravity="center_vertical"/>
+
+        <EditText
+                android:layout_width="107dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:editable="false"
+                android:layout_gravity="center_vertical"
+                android:id="@+id/buffEditText"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="false"
+            android:layout_alignLeft="@+id/videoView"
+            android:baselineAligned="true"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            android:background="@android:color/background_dark">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gyro status"
+                android:id="@+id/gyroStatus"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Throttle"
+                android:id="@+id/throttleStatus"
+                android:singleLine="true"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignRight="@+id/videoView"
+            android:gravity="bottom">
+
+        <com.example.Grass_Cutter.VerticalSeekBar
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:ems="10"
+                android:id="@+id/seekBar"
+                android:alpha="0.7"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:max="150"
+                android:indeterminate="false"
+                android:paddingRight="100px"/>
+    </LinearLayout>
+</RelativeLayout>
