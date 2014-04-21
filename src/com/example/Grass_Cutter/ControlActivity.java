@@ -2,6 +2,7 @@ package com.example.Grass_Cutter;
 
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -22,22 +23,39 @@ public class ControlActivity extends SensorProcessorActivity {
     private TextView throttleStatusView;
     private TextView gyroStatusView;
 
-    private int buffSize = 8;
+    private int buffSize = 3;
     private int throttle = 0;
 
     public class SeekbarHandler implements SeekBar.OnSeekBarChangeListener {
+        private int startPoint = 254;
+        private int maxDelta = 0;
+
         private void updateThrottle(int newThrottle) {
-            if (newThrottle > 100) {
-                newThrottle = 100;
+            if (startPoint == 254) {
+                startPoint = newThrottle;
+                Log.d("Throttle", "Set startPoint: " + newThrottle + " " + startPoint);
             }
-            throttle = newThrottle;
-            throttleStatusView.setText("Throttle: " + Integer.toString(newThrottle));
+
+            Log.d("Throttle", "startPoint: " + startPoint);
+
+            if (newThrottle > startPoint) {
+                throttle = Math.min(newThrottle - startPoint, 100);
+            }
+
+            if (newThrottle < startPoint) {
+                throttle = Math.max(newThrottle - startPoint, -100);
+            }
+
+            throttleStatusView.setText("Throttle: " + Integer.toString(throttle));
         }
 
         @Override
         public void onStopTrackingTouch(SeekBar seekBar) {
-            updateThrottle(0);
-            seekBar.setProgress(0);
+            startPoint = 254;
+
+            throttle = 0;
+            throttleStatusView.setText("Throttle: " + Integer.toString(0));
+            seekBar.setProgress(seekBar.getMax() / 2);
         }
 
         @Override
